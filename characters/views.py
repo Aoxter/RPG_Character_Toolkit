@@ -1,33 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from characters.models import Character
 
 
-characters = [
-    {
-        'author': "Piotr",
-        'name': 'Stefano',
-        'system': 'WeirdWorld',
-        'description': 'Mighty Stefano, the hero of whole WeirdWorld',
-        'date_created': '10.09.2021',
-        'last_update': '12.09.2021'
-    },
-    {
-        'author': "Piotr",
-        'name': 'Orlan',
-        'system': 'Blades in the Dark',
-        'description': 'Fallen nobleman who wants only one thing - reclaim his status and power',
-        'date_created': '10.08.2019',
-        'last_update': '10.08.2019'
-    }
-]
-
-
-def index(request):
+@ login_required()
+def home(request):
     context = {
-        #'characters': characters
         'characters': Character.objects.all()
     }
-    return render(request, 'characters/index.html', context)
+    return render(request, 'characters/home.html', context)
 
 
 def about(request):
