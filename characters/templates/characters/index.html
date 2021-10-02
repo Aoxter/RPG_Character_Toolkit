@@ -1,0 +1,18 @@
+{% extends "characters/base.html" %}
+{% block content %}
+    <h1>Your characters:</h1>
+    {%  for character in characters %}
+        <character class="media content-section">
+          <div class="media-body">
+            <div class="character-metadata">
+              <b class="text-muted">{{ character.author }}</b>
+              <big><a class="mr-2" href="#">{{ character.name }}</a></big>
+              <small class="text-muted">{{ character.system }}</small>
+            </div>
+            <p class="character-description">{{ character.description }}</p>
+            <p class="character-date"><b>Last updated</b>: {{ character.last_update|date:"d.m.Y H:i" }}</p>
+            <p class="character-date"><b>Created</b>: {{ character.date_created|date:"d.m.Y H:i" }}</p>
+          </div>
+        </character>
+    {% endfor %}
+{% endblock content %}
